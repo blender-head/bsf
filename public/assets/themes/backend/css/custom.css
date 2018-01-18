@@ -1,0 +1,121 @@
+.hide {
+	display: none;
+}
+
+.red {
+	color: #f00;
+}
+
+.mb-15 {
+	margin-bottom: 15px;
+}
+
+.text-center {
+	text-align: center;;
+}
+
+.helper-wrapper {
+	margin-top: 10px;
+}
+
+.help-text {
+	font-size: 12px;
+}
+
+.tokenfield .token {
+    background-color: #5fbeaa;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    cursor: text;
+    display: inline-block;
+    line-height: 22px;
+    max-width: 100%;
+    padding: 0px;
+    vertical-align: middle;
+    border: none;
+}
+
+.tokenfield .token .token-label, .ui-menu-item {
+	font-weight: 600;
+	color: #fff;
+    font-family: "Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 12px;
+}
+
+.tokenfield .token .close {
+	font-family: "Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	color: #fff;
+	opacity: inherit;
+	text-shadow: inherit;
+}
+
+.tokenfield.focus {
+	background-color: #ffffff;
+    border: 1px solid #aaaaaa;
+    box-shadow: none;
+    color: #333333;
+    outline: 0 none !important;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #5fbeaa !important;
+    border: none !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.ui-menu-item {
+	color: #000;
+}
+
+.close_error {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+    color: #000;
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.2;
+    text-shadow: 0 1px 0 #fff;
+    margin-top: -2px;
+}
+
+.add-category-wrapper {
+    margin-top: 25px;
+}
+
+.waitMe_container .waitMe {
+    z-index: 100 !important;
+}
+
+.post-meta {
+    margin-bottom: 3px;
+}
+
+.delete-all, .publish-all, .unpublish-all {
+    cursor: pointer;
+}
+
+.height-38 .bootstrap-select > .dropdown-toggle {
+    height: 38px;
+}
+
+.width-15 {
+    max-width: 15%;
+}
+
+.preview-image-wrapper {
+    margin-top: 20px;
+}
+
+.font-11 {
+    font-size: 11px;
+}
+
+.width-13 {
+    width: 13%;
+}

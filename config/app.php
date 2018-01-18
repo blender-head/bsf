@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        YAAP\Theme\ThemeServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,6 +178,24 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Module Bootstrap Providers...
+         */
+        App\Modules\ModulesServiceProvider::class,
+
+        /*
+         * Custom Library Service Providers...
+         */
+        App\Library\FormatManager\Providers\FormatManagerServiceProvider::class,
+
+        /*
+         * Module Routes Service Providers...
+         */
+        App\Modules\Backend\App\Auth\Providers\AuthRouteServiceProvider::class,
+        App\Modules\Backend\App\Band\Providers\BandRouteServiceProvider::class,
+        App\Modules\Backend\App\Blog\Providers\BlogRouteServiceProvider::class,
+        App\Modules\Backend\App\Event\Providers\EventRouteServiceProvider::class,
+        App\Modules\Backend\App\Feature\Providers\FeatureRouteServiceProvider::class,
     ],
 
     /*
@@ -225,7 +244,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Theme' => YAAP\Theme\Facades\Theme::class
     ],
 
 ];
