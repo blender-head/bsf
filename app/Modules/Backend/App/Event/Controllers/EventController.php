@@ -6,7 +6,7 @@
 
 	use App\Modules\Backend\App\Event\Requests\EventRepository;
 	use App\Modules\Backend\App\Event\Processors\EventProcessor;
-	use App\Modules\Backend\App\Event\Models\EventModel;
+	use App\Models\Event;
 
 	use View;
 	
@@ -22,7 +22,7 @@
 	    	return View::make('Event::create');
 	    }
 
-		public function postCreate(Request $request, EventRepository $form_processor, EventProcessor $data_processor, EventModel $model)
+		public function postCreate(Request $request, EventRepository $form_processor, EventProcessor $data_processor, Event $model)
 	    {
 	    	$form_processor->setOperation('create');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
@@ -33,13 +33,13 @@
 	    	return View::make('Event::edit');
 	    }
 
-	    public function postEdit(Request $request, EventRepository $form_processor, EventProcessor $data_processor, EventModel $model)
+	    public function postEdit(Request $request, EventRepository $form_processor, EventProcessor $data_processor, Event $model)
 	    {
 	    	$form_processor->setOperation('edit');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
 	    }
 
-	    public function postDelete(Request $request, EventRepository $form_processor, EventProcessor $data_processor, EventModel $model)
+	    public function postDelete(Request $request, EventRepository $form_processor, EventProcessor $data_processor, Event $model)
 	    {
 	    	$form_processor->setOperation('delete');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);

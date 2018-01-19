@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Bandung Ska Foundation'),
 
     /*
     |--------------------------------------------------------------------------
@@ -191,11 +191,23 @@ return [
         /*
          * Module Routes Service Providers...
          */
+
+        // Backend
         App\Modules\Backend\App\Auth\Providers\AuthRouteServiceProvider::class,
         App\Modules\Backend\App\Band\Providers\BandRouteServiceProvider::class,
         App\Modules\Backend\App\Blog\Providers\BlogRouteServiceProvider::class,
         App\Modules\Backend\App\Event\Providers\EventRouteServiceProvider::class,
         App\Modules\Backend\App\Feature\Providers\FeatureRouteServiceProvider::class,
+
+        // Frontend
+        App\Modules\Frontend\App\Home\Providers\HomeRouteServiceProvider::class,
+        App\Modules\Frontend\App\Band\Providers\BandRouteServiceProvider::class,
+        App\Modules\Frontend\App\Blog\Providers\BlogRouteServiceProvider::class,
+        App\Modules\Frontend\App\Feature\Providers\FeatureRouteServiceProvider::class,
+        App\Modules\Frontend\App\Review\Providers\ReviewRouteServiceProvider::class,
+        App\Modules\Frontend\App\Event\Providers\EventRouteServiceProvider::class,
+        App\Modules\Frontend\App\News\Providers\NewsRouteServiceProvider::class,
+        App\Modules\Frontend\App\Statcontent\Providers\StatcontentRouteServiceProvider::class,
     ],
 
     /*

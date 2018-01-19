@@ -6,7 +6,7 @@
 
 	use App\Modules\Backend\App\Band\Requests\BandRepository;
 	use App\Modules\Backend\App\Band\Processors\BandProcessor;
-	use App\Modules\Backend\App\Band\Models\BandModel;
+	use App\Models\Band;
 	
 	use View;
 	
@@ -22,7 +22,7 @@
 	    	return View::make('Band::create');
 	    }
 
-		public function postCreate(Request $request, BandRepository $form_processor, BandProcessor $data_processor, BandModel $model)
+		public function postCreate(Request $request, BandRepository $form_processor, BandProcessor $data_processor, Band $model)
 	    {
 	    	$form_processor->setOperation('create');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
@@ -33,13 +33,13 @@
 	    	return View::make('Band::edit');
 	    }
 
-	    public function postEdit(Request $request, BandRepository $form_processor, BandProcessor $data_processor, BandModel $model)
+	    public function postEdit(Request $request, BandRepository $form_processor, BandProcessor $data_processor, Band $model)
 	    {
 	    	$form_processor->setOperation('edit');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
 	    }
 
-	    public function postDelete(Request $request, BandRepository $form_processor, BandProcessor $data_processor, BandModel $model)
+	    public function postDelete(Request $request, BandRepository $form_processor, BandProcessor $data_processor, Band $model)
 	    {
 	    	$form_processor->setOperation('delete');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
