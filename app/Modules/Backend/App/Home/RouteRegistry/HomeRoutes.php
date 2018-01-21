@@ -16,10 +16,10 @@
 
         public function bind()
         {
-            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
+            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns, 'middleware' => ['admin']], function () {
                 
                 Route::get('/', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'home.index', 
                     'uses' => 'HomeController@getIndex'
                 ]);
 

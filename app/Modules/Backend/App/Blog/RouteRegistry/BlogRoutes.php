@@ -19,17 +19,17 @@
             Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
                 
                 Route::get('/', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'blog.index', 
                     'uses' => 'BlogController@getIndex'
                 ]);
 
                 Route::get('index', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'blog.index', 
                     'uses' => 'BlogController@getIndex'
                 ]);
 
                 Route::get('create', [
-                    'as' => $this->route_prefix . '.create', 
+                    'as' => 'blog.create', 
                     'uses' => 'BlogController@getCreate'
                 ]);
 
@@ -38,7 +38,7 @@
                 ]);
 
                 Route::get('edit', [
-                    'as' => $this->route_prefix . '.edit', 
+                    'as' => 'blog.edit', 
                     'uses' => 'BlogController@postEdit'
                 ]);
 

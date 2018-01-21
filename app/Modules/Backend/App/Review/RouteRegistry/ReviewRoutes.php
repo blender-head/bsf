@@ -19,17 +19,17 @@
             Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
                 
                 Route::get('/', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'review.index', 
                     'uses' => 'ReviewController@getIndex'
                 ]);
 
                 Route::get('index', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'review.index', 
                     'uses' => 'ReviewController@getIndex'
                 ]);
 
                 Route::get('create', [
-                    'as' => $this->route_prefix . '.create', 
+                    'as' => 'review.create', 
                     'uses' => 'ReviewController@getCreate'
                 ]);
 
@@ -38,7 +38,7 @@
                 ]);
 
                 Route::get('edit', [
-                    'as' => $this->route_prefix . '.edit', 
+                    'as' => 'review.edit', 
                     'uses' => 'ReviewController@postEdit'
                 ]);
 

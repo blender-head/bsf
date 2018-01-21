@@ -19,17 +19,17 @@
             Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
                 
                 Route::get('/', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'feature.index', 
                     'uses' => 'FeatureController@getIndex'
                 ]);
 
                 Route::get('index', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'feature.index', 
                     'uses' => 'FeatureController@getIndex'
                 ]);
 
                 Route::get('create', [
-                    'as' => $this->route_prefix . '.create', 
+                    'as' => 'feature.create', 
                     'uses' => 'FeatureController@getCreate'
                 ]);
 
@@ -38,7 +38,7 @@
                 ]);
 
                 Route::get('edit', [
-                    'as' => $this->route_prefix . '.edit', 
+                    'as' => 'feature.edit', 
                     'uses' => 'FeatureController@postEdit'
                 ]);
 

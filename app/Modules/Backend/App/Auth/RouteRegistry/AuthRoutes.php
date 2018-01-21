@@ -19,7 +19,7 @@
             Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
                     
                 Route::get('login', [
-                    'as' => $this->route_prefix . '.login', 
+                    'as' => 'auth.login', 
                     'uses' => 'AuthController@getLogin'
                 ]);
 

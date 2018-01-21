@@ -24,12 +24,12 @@
                 ]);
 
                 Route::get('index', [
-                    'as' => $this->route_prefix . '.index', 
+                    'as' => 'event.index', 
                     'uses' => 'EventController@getIndex'
                 ]);
 
                 Route::get('create', [
-                    'as' => $this->route_prefix . '.create', 
+                    'as' => 'event.create', 
                     'uses' => 'EventController@getCreate'
                 ]);
 
@@ -38,7 +38,7 @@
                 ]);
 
                 Route::get('edit', [
-                    'as' => $this->route_prefix . '.edit', 
+                    'as' => 'event.edit', 
                     'uses' => 'EventController@postEdit'
                 ]);
 
