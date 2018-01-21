@@ -212,36 +212,45 @@
                     <div id="sidebar-menu">
                         <ul>
                           <li class="text-muted menu-title">Navigation</li>
+                          <li><a href="{{ url($be_prefix) }}"><i class="ti-home"></i><span>Home</span></a></li>
+                          <li><a href="{{ url($be_prefix . '/blogs') }}"><i class="ti-book"></i><span>Blogs</span></a></li>
+                          <li><a href="{{ url($be_prefix . '/news') }}"><i class="ti-write"></i><span>News</span></a></li>
+                          <li><a href="{{ url($be_prefix . '/reviews') }}"><i class="ti-archive"></i><span>Reviews</span></a></li>
+                          <li><a href="{{ url($be_prefix . '/features') }}"><i class="ti-server"></i><span>Feature</span></a></li>
+                          <li><a href="{{ url($be_prefix . '/events') }}"><i class="ti-agenda"></i><span>Events</span></a></li>
+                          <li><a href="{{ url($be_prefix . '/bands') }}"><i class="ti-palette"></i><span>Bands</span></a></li>
 
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
-                                <ul class="list-unstyled">
-                                    <li><a href="index.html">Dashboard 1</a></li>
-                                    <li><a href="dashboard_2.html">Dashboard 2</a></li>
-                                    <li><a href="dashboard_3.html">Dashboard 3</a></li>
-                                    <li><a href="dashboard_4.html">Dashboard 4</a></li>
-                                </ul>
-                            </li>
+                          <!--
+                          <li class="has_sub">
+                              <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+                              <ul class="list-unstyled">
+                                  <li><a href="index.html">Dashboard 1</a></li>
+                                  <li><a href="dashboard_2.html">Dashboard 2</a></li>
+                                  <li><a href="dashboard_3.html">Dashboard 3</a></li>
+                                  <li><a href="dashboard_4.html">Dashboard 4</a></li>
+                              </ul>
+                          </li>
 
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-paint-bucket"></i> <span> UI Kit </span> <span class="menu-arrow"></span> </a>
-                                <ul class="list-unstyled">
-                                    <li><a href="ui-buttons.html">Buttons</a></li>
-                                    <li><a href="ui-loading-buttons.html">Loading Buttons</a></li>
-                                    <li><a href="ui-cards.html">Cards</a></li>
-                                    <li><a href="ui-portlets.html">Portlets</a></li>
-                                    <li><a href="ui-checkbox-radio.html">Checkboxs-Radios</a></li>
-                                    <li><a href="ui-tabs.html">Tabs</a></li>
-                                    <li><a href="ui-modals.html">Modals</a></li>
-                                    <li><a href="ui-progressbars.html">Progress Bars</a></li>
-                                    <li><a href="ui-notification.html">Notification</a></li>
-                                    <li><a href="ui-images.html">Images</a></li>
-                                    <li><a href="ui-carousel.html">Carousel</a>
-                                    <li><a href="ui-video.html">Video</a>
-                                    <li><a href="ui-bootstrap.html">Bootstrap UI</a></li>
-                                    <li><a href="ui-typography.html">Typography</a></li>
-                                </ul>
+                          <li class="has_sub">
+                              <a href="javascript:void(0);" class="waves-effect"><i class="ti-paint-bucket"></i> <span> UI Kit </span> <span class="menu-arrow"></span> </a>
+                              <ul class="list-unstyled">
+                                  <li><a href="ui-buttons.html">Buttons</a></li>
+                                  <li><a href="ui-loading-buttons.html">Loading Buttons</a></li>
+                                  <li><a href="ui-cards.html">Cards</a></li>
+                                  <li><a href="ui-portlets.html">Portlets</a></li>
+                                  <li><a href="ui-checkbox-radio.html">Checkboxs-Radios</a></li>
+                                  <li><a href="ui-tabs.html">Tabs</a></li>
+                                  <li><a href="ui-modals.html">Modals</a></li>
+                                  <li><a href="ui-progressbars.html">Progress Bars</a></li>
+                                  <li><a href="ui-notification.html">Notification</a></li>
+                                  <li><a href="ui-images.html">Images</a></li>
+                                  <li><a href="ui-carousel.html">Carousel</a>
+                                  <li><a href="ui-video.html">Video</a>
+                                  <li><a href="ui-bootstrap.html">Bootstrap UI</a></li>
+                                  <li><a href="ui-typography.html">Typography</a></li>
+                              </ul>
                             </li>
+                            -->
                         </ul>
                         <div class="clearfix"></div>
                     </div>

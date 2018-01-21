@@ -1,28 +1,28 @@
 <?php
 
-	namespace App\Modules\Backend\App\Blog\Controllers;
+	namespace App\Modules\Backend\App\News\Controllers;
 
 	use App\Modules\Backend\Bases\BaseBackendController;
 
-	use App\Modules\Backend\App\Blog\Requests\BlogRepository;
-	use App\Modules\Backend\App\Blog\Processors\BlogProcessor;
-	use App\Models\Blog;
+	use App\Modules\Backend\App\News\Requests\NewsRepository;
+	use App\Modules\Backend\App\News\Processors\NewsProcessor;
+	use App\Models\News;
 
 	use View;
 	
-	class BlogController extends BaseBackendController
+	class NewsController extends BaseBackendController
 	{
 		public function getIndex()
 	    {
-	    	return View::make('Blog::index');
+	    	return View::make('News::index');
 	    }
 
 	    public function getCreate()
 	    {
-	    	return View::make('Blog::create');
+	    	return View::make('News::create');
 	    }
 
-		public function postCreate(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+		public function postCreate(Request $request, NewsRepository $form_processor, NewsProcessor $data_processor, News $model)
 	    {
 	    	$form_processor->setOperation('create');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
@@ -33,13 +33,13 @@
 	    	return View::make('Blog::edit');
 	    }
 
-	    public function postEdit(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+	    public function postEdit(Request $request, NewsRepository $form_processor, NewsProcessor $data_processor, News $model)
 	    {
 	    	$form_processor->setOperation('edit');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
 	    }
 
-	    public function postDelete(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+	    public function postDelete(Request $request, NewsRepository $form_processor, NewsProcessor $data_processor, News $model)
 	    {
 	    	$form_processor->setOperation('delete');
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);

@@ -1,6 +1,10 @@
 <?php
 
 	return  [
+		[
+			'name' => 'Home',
+			'type' => 'backend'
+		],
     	[
 			'name' => 'Auth',
 			'type' => 'backend'
@@ -19,6 +23,14 @@
 		],
 		[
 			'name' => 'Feature',
+			'type' => 'backend'
+		],
+		[
+			'name' => 'News',
+			'type' => 'backend'
+		],
+		[
+			'name' => 'Review',
 			'type' => 'backend'
 		],
 		[

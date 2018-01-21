@@ -193,11 +193,14 @@ return [
          */
 
         // Backend
+        App\Modules\Backend\App\Home\Providers\HomeRouteServiceProvider::class,
         App\Modules\Backend\App\Auth\Providers\AuthRouteServiceProvider::class,
         App\Modules\Backend\App\Band\Providers\BandRouteServiceProvider::class,
         App\Modules\Backend\App\Blog\Providers\BlogRouteServiceProvider::class,
         App\Modules\Backend\App\Event\Providers\EventRouteServiceProvider::class,
         App\Modules\Backend\App\Feature\Providers\FeatureRouteServiceProvider::class,
+        App\Modules\Backend\App\News\Providers\NewsRouteServiceProvider::class,
+        App\Modules\Backend\App\Review\Providers\ReviewRouteServiceProvider::class,
 
         // Frontend
         App\Modules\Frontend\App\Home\Providers\HomeRouteServiceProvider::class,

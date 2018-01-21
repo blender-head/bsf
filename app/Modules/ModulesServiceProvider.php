@@ -8,6 +8,8 @@
 
     use View;
 
+    use App\Library\Bases\BaseModuleRoute;
+
     class ModulesServiceProvider extends ServiceProvider
     {
         /**
@@ -16,10 +18,16 @@
          */
         public function boot()
         {
+            $this->register_module_views();
+            $this->set_shared_views();
+        }
+
+        public function register() {}
+
+        private function register_module_views()
+        {
             // For each of the registered modules, include their Views
             $modules = config("modules");
-
-            $paths = [];
 
             foreach($modules as $module)
             {   
@@ -29,21 +37,16 @@
                 $module_view_path = realpath(app_path('Modules' . '/' . $module_type . '/' . 'App' . '/' . $module_name . '/' . 'Views'));
 
                 // Load the views
-        
                 if(is_dir($module_view_path)) {
-                    //$this->loadViewsFrom($module_name, $module_view_path);
                     View::addNamespace($module_name, $module_view_path);
                 }
-
-                array_push($paths, $module_view_path);
             }
-
-            //$merged_paths = array_merge($this->app->config['view']['paths'], $paths);
-
-            //$finder = new \Illuminate\View\FileViewFinder(app()['files'], $merged_paths);
-            //View::setFinder($finder);
         }
 
-        public function register() {}
-
+        private function set_shared_views()
+        {
+            view()->composer(['layouts.admin'], function ($view) {
+                $view->be_prefix = BaseModuleRoute::BE_PREFIX;
+            });
+        }
     }
