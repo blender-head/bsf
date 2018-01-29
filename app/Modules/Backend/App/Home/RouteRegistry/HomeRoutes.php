@@ -16,7 +16,7 @@
 
         public function bind()
         {
-            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns, 'middleware' => ['admin']], function () {
+            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns, 'middleware' => ['role:admin|root']], function () {
                 
                 Route::get('/', [
                     'as' => 'home.index', 

@@ -16,6 +16,8 @@
         <link href="{{ Theme::asset('plugins/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ Theme::asset('plugins/jquery-ui/jquery-ui.css') }}" rel="stylesheet" />
         <link href="{{ Theme::asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <!--<link href="{{ Theme::asset('css/dataTables.bootstrap.min.css') }}">-->
+        <link href="{{ Theme::asset('plugins/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ Theme::asset('css/core.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ Theme::asset('css/components.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ Theme::asset('css/icons.css') }}" rel="stylesheet" type="text/css" />
@@ -34,7 +36,8 @@
         <![endif]-->
 
         <script type="text/javascript">
-            var baseUrl = "{{ url('/') }}"
+            var baseUrl = "{{ url('/') . '/' . $be_prefix }}";
+            var token = "{{ csrf_token() }}";
         </script>
 
         <script src="{{ Theme::asset('/js/modernizr.min.js') }}"></script>
@@ -405,7 +408,12 @@
         <script src="{{ Theme::asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ Theme::asset('js/detect.js') }}"></script>
         <script src="{{ Theme::asset('js/fastclick.js') }}"></script>
-
+        <!--
+        <script src="{{ Theme::asset('js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ Theme::asset('js/dataTables.bootstrap.min.js') }}"></script>
+        -->
+        <script src="{{ Theme::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ Theme::asset('plugins/datatables/dataTables.bootstrap.j') }}s"></script>
         <script src="{{ Theme::asset('js/jquery.slimscroll.js') }}"></script>
         <script src="{{ Theme::asset('js/jquery.blockUI.js') }}"></script>
         <script src="{{ Theme::asset('js/waves.js') }}"></script>

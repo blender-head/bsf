@@ -8,13 +8,23 @@
 	use App\Modules\Backend\App\Blog\Processors\BlogProcessor;
 	use App\Models\Blog;
 
+	use Illuminate\Http\Request;
+
 	use View;
 	
 	class BlogController extends BaseBackendController
 	{
-		public function getIndex()
+		public function getIndex(Blog $model)
 	    {
+	    	//var_dump($model->getAll(['length' => '10', 'start' => '0']));
+	    	//die;
 	    	return View::make('Blog::index');
+	    }
+
+	    public function postIndex(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+	    {
+	    	$form_processor->setOperation('index');
+	    	return $this->startIndexListProcess($request, $form_processor, $data_processor, $model);
 	    }
 
 	    public function getCreate()

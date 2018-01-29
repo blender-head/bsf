@@ -1,5 +1,36 @@
 var confirm = '';
 
+function ajax_data_table(el, el_loader, url)
+{
+    $(el).DataTable({
+        serverSide: true,
+        bInfo: false,
+        searching: false,
+        bSort : false,
+        ajax: {
+            url: url,
+            type:'POST',
+            data: {
+                
+            },
+            beforeSend: function() {
+
+                $(el_loader).waitMe({
+                    effect : 'stretch',
+                    text : 'Loading data...',
+                    bg : 'rgba(255,255,255,0.7)',
+                    color : '#000',
+                    sizeW : '',
+                    sizeH : ''
+                });
+            },
+            complete: function(){
+                $(el_loader).waitMe('hide');
+            }
+        }
+    });
+}
+
 function showError(data)
 {
     var msg = '';

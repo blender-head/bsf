@@ -261,7 +261,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Theme' => YAAP\Theme\Facades\Theme::class,
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Format' => App\Library\FormatManager\Facades\Format::class,
     ],
 
 ];

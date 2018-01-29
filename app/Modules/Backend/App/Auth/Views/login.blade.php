@@ -54,8 +54,7 @@
                         <div class="alert alert-danger" role="alert">
                             <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <strong class="error-type"></strong> 
-                            <div class="error-messages">
-                            </div>
+                            <div class="error-messages"></div>
                         </div>  
                     </div>
                 </div>

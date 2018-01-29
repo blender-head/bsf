@@ -2,19 +2,19 @@ function showError(data)
 {
     $('#error-container').removeClass('hide');
     $('.alert').show();
-    $('.error-type').html(data.message);
+    //$('.error-type').html(data.message);
     $('.error-messages').html('');
 
-    if(data.error == 9107)
+    if(data.error_code == 9107)
     {
-        for (var x in data.data.errors)
+        for (var x in data.message.errors)
         {
-            $('.error-messages').append('<span>' + data.data.errors[x][0] + '</span><br />');
+            $('.error-messages').append('<span>' + data.message.errors[x][0] + '</span><br />');
         }
     }
     else
     {
-        $('.error-messages').append('<span>' + data.data.errors + '</span><br />');
+        $('.error-messages').append('<span>' + data.message + '</span><br />');
     }
     
 }
@@ -34,7 +34,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: baseUrl + '/bsf/login',
+            url: baseUrl + '/senyap/login',
             data: form_data,
             processData: false,
             contentType: false,
@@ -50,13 +50,13 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                if(data.error)
+                if(data.error_code != 0)
                 {
                     showError(data);
                 }
                 else
                 {
-                    window.location.replace(baseUrl + '/admin/dashboard');
+                    window.location.replace(baseUrl + '/senyap');
                 }
 
             },

@@ -12,6 +12,10 @@
 			{
 				switch($data['op_type'])
 				{
+					case 'index':
+						$this->output = $this->getIndexData($model, $data);
+						break;
+
 					case 'create':
 						$id = $model::save($data);
 						break;
@@ -25,7 +29,6 @@
 						break;
 				}
 
-				$this->output = $id;
 				return true;
 			}
 			catch(\Error $e)

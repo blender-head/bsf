@@ -2,8 +2,12 @@
 	
 	namespace App\Library\Bases;
 	
+	use App\Library\Traits\AjaxDataTrait;
+
 	abstract class BaseProcessor implements ProcessorInterface
 	{
+		use AjaxDataTrait;
+		
 		protected $error;
 		protected $error_code;
 		protected $output;

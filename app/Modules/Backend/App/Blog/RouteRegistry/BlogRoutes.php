@@ -28,6 +28,10 @@
                     'uses' => 'BlogController@getIndex'
                 ]);
 
+                Route::post('index', [
+                    'uses' => 'BlogController@postIndex'
+                ]);
+
                 Route::get('create', [
                     'as' => 'blog.create', 
                     'uses' => 'BlogController@getCreate'
