@@ -31,7 +31,7 @@
             $query = "SELECT `b`.`id`, `b`.`title`, `b`.`slug`, `b`.`created_at`, `u`.`name` AS `author`, IF(`b`.`status` =  1, 'Published', 'Unpublished') AS `status`
                 FROM `blogs` AS `b` INNER JOIN `users` AS `u` ON `b`.`created_by` = `u`.`id` 
             ORDER BY `b`.`created_at` DESC 
-            LIMIT :limit OFFSET :offset";
+            LIMIT :offset,:limit";
 
             $results = DB::select($query, ['limit' => $data['length'], 'offset' => $data['start']]);
             return $results;
@@ -56,10 +56,11 @@
             foreach ($db_data as $result) 
             {
                 $input = [
+                    View::make('partials.selector', ['id' => $result->id, 'content_type' => 'blog'])->render(),
                     $row_number,
                     $result->title,
                     $result->author,
-                    $result->status,
+                    View::make('partials.status', ['status' => $result->status])->render(),
                     date('d-m-Y H:i:s', strtotime($result->created_at)),
                     View::make('partials.default_action', ['data' => $result, 'edit_url' => $edit_url])->render()
                 ];

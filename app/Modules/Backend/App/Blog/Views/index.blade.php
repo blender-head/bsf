@@ -38,10 +38,11 @@
                     </div>
 
                     <div class="table-wrapper">
-                    	<table id="blog-data" class="table table-striped table-bordered">
+                    	<table id="blog-data" class="table table-striped table-bordered table-actions-bar">
 	                    	<thead>
 	                            <tr>
 	                                <th><input type="checkbox" id="selectall"></th>
+	                                <th>No</th>
 	                                <th>Title</th>
 	                                <th>Author</th>
 	                                <th>Status</th>
@@ -64,10 +65,24 @@
 
 @section('scripts')
 	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/api/fnMultiFilter.js"></script>
+
+	<script type="text/javascript">
+        var form_element = '#create-blog';
+        var data_selector = 'blog';
+        var op_url = baseUrl + '/blogs/delete';
+        var redirect_url = baseUrl + '/blogs/index';
+        var op_source = 'Blog';
+        var delete_url = baseUrl + '/blogs/delete';
+        var publish_url = baseUrl + '/blogs/set_status';
+        var token = "{{ csrf_token() }}";
+    </script>
 @stop
 
 @section('additional_scripts')
+	<script src="{{ Theme::asset('js/opManager.js') }}"></script>
+
     <script type="text/javascript">
+
     	$(document).ready(function() {
       		var datatable_el = "#blog-data";
       		var datatable_url = baseUrl + '/blogs/index';

@@ -46,11 +46,8 @@
 				$roles = explode(self::DELIMITER, $roles);
 			}
 
-			//var_dump($roles);
-			//die;
-			
 			if ($this->auth->guest() || !$request->user()->hasRole($roles)) {
-				abort(403);
+				return redirect()->route('auth.login.get');
 			}
 
 			return $next($request);

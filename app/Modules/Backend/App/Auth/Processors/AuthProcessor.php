@@ -15,7 +15,7 @@
 				switch($data['op_type'])
 				{
 					case 'login':
-						$this->login($data);
+						$model->login($data);
 						break;
 				}
 
@@ -27,18 +27,5 @@
 				$this->error_code = $e->getCode();
 				return false;
 			}
-		}
-
-		private function login($data)
-		{
-			$credentials = [
-		        'email'     => $data['email'],
-		        'password'  => $data['password']
-		    ];
-
-        	if (!Auth::attempt($credentials)) 
-        	{
-		    	throw new \Error("Invalid login data", 1000);	
-		    } 
 		}
 	}

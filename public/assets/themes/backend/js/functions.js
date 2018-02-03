@@ -11,7 +11,7 @@ function ajax_data_table(el, el_loader, url)
             url: url,
             type:'POST',
             data: {
-                
+                '_token': token
             },
             beforeSend: function() {
 

@@ -1,0 +1,1 @@
+<td><input type="checkbox" class="{{ $content_type }}" value="{{ $id }}"></td>

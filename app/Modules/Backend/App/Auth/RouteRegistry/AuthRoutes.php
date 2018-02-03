@@ -16,7 +16,7 @@
 
         public function bind()
         {
-            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
+            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns, 'middleware' => ['web']], function () {
                     
                 Route::get('login', [
                     'as' => 'auth.login', 
