@@ -33,7 +33,7 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                if(data.error)
+                if(data.error_code)
                 {
                     showError(data);
                 }

@@ -7,7 +7,10 @@
 	class BlogRepository extends BaseRepository
 	{
         private $id;
-		private $name;
+        private $title;
+        private $content;
+        private $excerpt;
+        private $featured_image;
 
 		public function setOperation($operation_type)
         {
@@ -17,7 +20,10 @@
         public function getInput($request)
         {	
             $this->id = $request->input('id');
-            $this->name = $request->input('name');
+            $this->title = $request->input('title');
+            $this->content = $request->input('content');
+            $this->excerpt = $request->input('excerpt');
+            $this->featured_image = $request->file('featured_image');
             $this->page = $request->input('page');
             $this->limit = $request->input('limit');
             $this->draw = $request->input('draw');
@@ -30,7 +36,10 @@
         {
             $this->data = [
                 'id' => $this->id,
-                'name' => $this->name,
+                'title' => $this->title,
+                'content' => $this->content,
+                'excerpt' => $this->excerpt,
+                'featured_image' => $this->featured_image,
                 'op_type' => $this->operation_type,
                 'page' => $this->page,
                 'limit' => $this->limit,
@@ -50,17 +59,35 @@
 
             if($this->operation_type == 'create')
             {
-                $this->rules = [];
+                $this->rules = [
+                    'title' => 'required',
+                    'content' => 'required',
+                    'featured_image' => 'image|mimes:jpeg,png,jpg|max:200|dimensions:width=950,height=633'
+                ];
             }
 
             if($this->operation_type == 'edit')
             {
-                $this->rules = [];
+                $this->rules = [
+                    'id' => 'required',
+                    'title' => 'required',
+                    'content' => 'required'
+                ];
             }
 
             if($this->operation_type == 'delete')
             {
-                $this->rules = [];
+                $this->rules = [
+                    'id' => 'required',
+                ];
+            }
+
+            if($this->operation_type == 'set_status')
+            {
+                $this->rules = [
+                    'id' => 'required',
+                    'status' => 'required'
+                ];
             }
         }
 	}

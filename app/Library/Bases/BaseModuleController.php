@@ -6,10 +6,19 @@
 
     use App\Library\ErrorManager\ErrorCode;
 
+    use App\Library\Helper\Helper;
+
     use Format;
 
 	class BaseModuleController extends Controller
 	{
+        protected $helper;
+
+        public function __construct()
+        {
+            $this->helper = new Helper();
+        }
+        
 	    protected function startProcess($input, $form_processor, $data_processor, $model)
 	    {
             if($form_processor->validate($input) == false)

@@ -26,7 +26,7 @@
 			
 			$row_number = $data['start'] + 1;
 
-			$output['data'] = $model->prepare_index_data($db_data, $row_number);
+			$output['data'] = $model->prepareIndexData($db_data, $row_number);
 
 			return $output;	
         }

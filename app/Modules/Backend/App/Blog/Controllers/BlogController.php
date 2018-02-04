@@ -49,6 +49,12 @@
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
 	    }
 
+	    public function postSetStatus(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+	    {
+	    	$form_processor->setOperation('set_status');
+	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
+	    }
+	    
 	    public function postDelete(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
 	    {
 	    	$form_processor->setOperation('delete');

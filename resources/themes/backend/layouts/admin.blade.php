@@ -272,7 +272,7 @@
                 @yield('content')
 
                 <footer class="footer text-right">
-                    2015 © Ubold.
+                    2017 © Bandung Ska Foundation.
                 </footer>
 
             </div>

@@ -2,22 +2,33 @@
 
     namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Model;
+    use App\Library\Bases\BaseModel;
 
-    use Cviebrock\EloquentSluggable\Sluggable;
+    use Illuminate\Database\Eloquent\Model;
 
     use App\Library\Bases\BaseModuleRoute;
 
     use DB;
     use View;
+    use Auth;
+    use Config;
+    use File;
 
-    class Blog extends Model
+    use Upload;
+
+    class Blog extends BaseModel
     {
-        use Sluggable;
+        public $table = 'blogs';
 
-        protected $table = 'blogs';
+        public function __construct()
+        {
+            parent::__construct();
+        }
 
-        public function sluggable()
+        /**
+         *  Implmentation of Cviebrock\EloquentSluggable\Sluggable sluggable abstract method
+         */
+        public function sluggable(): array
         {
             return [
                 'slug' => [
@@ -26,7 +37,12 @@
             ];
         }
 
-        public function getAll(array $data)
+        /**
+         *  Get paginated blog data
+         *  @param array $data
+         *  @return array
+         */
+        public function getAll(array $data): array
         {
             $query = "SELECT `b`.`id`, `b`.`title`, `b`.`slug`, `b`.`created_at`, `u`.`name` AS `author`, IF(`b`.`status` =  1, 'Published', 'Unpublished') AS `status`
                 FROM `blogs` AS `b` INNER JOIN `users` AS `u` ON `b`.`created_by` = `u`.`id` 
@@ -37,7 +53,51 @@
             return $results;
         }
 
-        public function getBySlug(string $slug)
+        /**
+         *  Save blog data
+         *  @param array $data
+         *  @return int
+         */
+        public function saveData(array $data): int
+        {
+            DB::beginTransaction();
+
+            try
+            {
+                Upload::upload($data['featured_image'], Config::get('upload_path.blog'));
+
+                $this->title = $data['title'];
+                $this->slug = $this->createSlug(Blog::class, 'slug', $this->title);
+                $this->content = $data['content'];
+                $this->excerpt = $data['excerpt'] ? $data['excerpt'] : $this->helper->getExcerpt(strip_tags($data['content']), 0, 300);
+                $this->image_normal = Upload::getFilename();
+                $this->image_thumbnail = Upload::getFilename();
+                $this->status = 1;
+                $this->created_by = Auth::user()->id;
+                $this->updated_by = Auth::user()->id;
+                $this->save();
+
+                DB::commit();
+
+                return $this->id;
+            }
+            catch(\Error $e)
+            {
+                DB::rollback();
+                File::delete(Config::get('upload_path.blog') . '/' . Upload::getFilename());
+            }
+        }
+
+        public function editData(string $id) {}
+        public function setStatus(string $id) {}
+        public function deleteData(string $id) {}
+
+        /**
+         *  Get blog by slug
+         *  @param string $slug
+         *  @return array
+         */
+        public function getBySlug(string $slug): array
         {
             $query = "SELECT `b`.`title`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
                 FROM `blogs` AS `b` INNER JOIN `users` AS `u` ON `b`.`created_by` = `u`.`id` 
@@ -47,7 +107,13 @@
             return $result;
         }
 
-        public function prepare_index_data(array $db_data, string $row_number)
+        /**
+         *  Prepare blog index page data for jQuery datatable
+         *  @param array $db_data
+         *  @param string $row_number
+         *  @return array
+         */
+        public function prepareIndexData(array $db_data, string $row_number): array
         {
             $output = [];
 

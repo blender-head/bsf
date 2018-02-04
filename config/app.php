@@ -169,6 +169,7 @@ return [
          */
         YAAP\Theme\ThemeServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -188,6 +189,8 @@ return [
          * Custom Library Service Providers...
          */
         App\Library\FormatManager\Providers\FormatManagerServiceProvider::class,
+        App\Library\UploadManager\Providers\UploadManagerServiceProvider::class,
+        App\Library\ImageManager\Providers\ImageManagerServiceProvider::class,
 
         /*
          * Module Routes Service Providers...
@@ -260,9 +263,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Image' => Intervention\Image\Facades\Image::class,
         'Theme' => YAAP\Theme\Facades\Theme::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Format' => App\Library\FormatManager\Facades\Format::class,
+        'Upload' => App\Library\UploadManager\Facades\Upload::class,
+        'ImageManager' => App\Library\ImageManager\Facades\ImageManager::class,
     ],
 
 ];

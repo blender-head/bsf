@@ -17,15 +17,19 @@
 						break;
 
 					case 'create':
-						$id = $model::save($data);
+						$id = $model->saveData($data);
 						break;
 
 					case 'edit':
-						$id = $model::edit($data);
+						$id = $model->editData($data);
+						break;
+
+					case 'set_status':
+						$model->setStatus($id);
 						break;
 
 					case 'delete':
-						$model::delete($id);
+						$model->deleteData($id);
 						break;
 				}
 

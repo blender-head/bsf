@@ -43,11 +43,15 @@
 
                 Route::get('edit', [
                     'as' => 'blog.edit', 
-                    'uses' => 'BlogController@postEdit'
+                    'uses' => 'BlogController@getEdit'
                 ]);
 
                 Route::post('edit', [
                     'uses' => 'BlogController@postEdit'
+                ]);
+
+                Route::post('set_status', [
+                    'uses' => 'BlogController@postSetStatus'
                 ]);
 
                 Route::post('delete', [

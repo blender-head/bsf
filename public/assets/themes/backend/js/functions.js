@@ -35,28 +35,27 @@ function showError(data)
 {
     var msg = '';
 
-    if (data.error == '9107') 
+    if (data.error_code == '9107') 
     {
         //msg = '<div><strong>' + data.message + '</strong></div>';
 
-        for (var x in data.data.errors) {
-            msg += '<div><strong><em>- ' + data.data.errors[x][0] + '</em></strong></div>';
+        for (var x in data.message.errors) {
+            msg += '<div><strong><em>- ' + data.message.errors[x][0] + '</em></strong></div>';
         }
 
         swal({
-            title: data.message,   
+            title: 'Validation Error',   
             text: msg,   
             html: true,
             type: "error",
         });
     }
-    else if (data.error == '1000') 
+    else if (data.error_code == '1000') 
     {
-        //msg = '<div><p><strong>' + data.message + '</strong></p></div>';
-        msg += '<div><strong><em>' + data.data.errors + '</em></strong></div>';
+        msg += '<div><strong><em>' + data.message.errors + '</em></strong></div>';
 
         swal({
-            title: data.message,   
+            title: 'System Error',   
             text: msg,   
             html: true,
             type: "error",
@@ -65,7 +64,7 @@ function showError(data)
     else 
     {
         swal({
-            title: data.message,   
+            title: 'Error',   
             html: true,
             type: "error",
         });
@@ -346,4 +345,70 @@ function setStatus(id, status, token, url, redirect_url)
             $('.card-box').waitMe('hide');
         } 
     });
+}
+
+function preview_image(event, file, img_element)
+{
+    var fileReader = new FileReader();
+    
+    var result = false;
+
+    fileReader.onloadend = function(event) {
+        var arr = (new Uint8Array(event.target.result)).subarray(0, 4);
+    
+        var header = "";
+    
+        for (var i = 0; i < arr.length; i++) {
+            header += arr[i].toString(16);
+        }
+
+        switch (header) {
+            case "89504e47":
+            case "ffd8ffe0":
+            case "ffd8ffe1":
+            case "ffd8ffe2":
+            case "ffd8ffe3":
+            case "ffd8ffe8":
+                result = true;
+                break;
+        }
+
+        if(result)
+        {
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                var width = 0;
+
+                var width_attr = '100%';
+
+                var image = new Image();
+ 
+                //Set the Base64 string return from FileReader as source.
+                image.src = event.target.result;
+                       
+                //Validate the File Height and Width.
+                image.onload = function () {
+                    
+                    width = this.width;
+
+                    if (width > 300) {
+                        width_attr = '40%';
+                        $(img_element).attr('width', width_attr);
+                    }
+                    
+                    console.log(width_attr);
+
+                    $(img_element).attr('src', event.target.result);
+
+                    return true;
+                };
+            }
+
+            reader.readAsDataURL(file);
+        }
+    };
+  
+    fileReader.readAsArrayBuffer(file);
 }
