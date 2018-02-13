@@ -8,6 +8,8 @@
 	use App\Modules\Backend\App\Blog\Processors\BlogProcessor;
 	use App\Models\Blog;
 
+	use App\Modules\Backend\App\Blog\Services\BlogServices;
+
 	use Illuminate\Http\Request;
 
 	use View;
@@ -31,10 +33,10 @@
 	    	return View::make('Blog::create');
 	    }
 
-		public function postCreate(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+		public function postCreate(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, BlogServices $service)
 	    {
 	    	$form_processor->setOperation('create');
-	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
+	    	return $this->startProcess($request, $form_processor, $data_processor, $service);
 	    }
 
 	    public function getEdit(Request $request, Blog $model)

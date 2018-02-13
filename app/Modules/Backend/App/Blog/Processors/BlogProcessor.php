@@ -17,7 +17,7 @@
 						break;
 
 					case 'create':
-						$id = $model->saveData($data);
+						$id = $model->save($data);
 						break;
 
 					case 'edit':

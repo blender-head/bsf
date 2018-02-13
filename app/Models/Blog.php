@@ -11,11 +11,7 @@
     use DB;
     use View;
     use Auth;
-    use Config;
-    use File;
-
-    use Upload;
-
+    
     class Blog extends BaseModel
     {
         public $table = 'blogs';
@@ -60,32 +56,18 @@
          */
         public function saveData(array $data): int
         {
-            DB::beginTransaction();
+            $this->title = $data['title'];
+            $this->slug = $this->createSlug(Blog::class, 'slug', $this->title);
+            $this->content = $data['content'];
+            $this->excerpt = $data['excerpt'] ? $data['excerpt'] : $this->helper->getExcerpt(strip_tags($data['content']), 0, 300);
+            $this->image_normal = '';
+            $this->image_thumbnail = '';
+            $this->status = 1;
+            $this->created_by = Auth::user()->id;
+            $this->updated_by = Auth::user()->id;
+            $this->save();
 
-            try
-            {
-                Upload::upload($data['featured_image'], Config::get('upload_path.blog'));
-
-                $this->title = $data['title'];
-                $this->slug = $this->createSlug(Blog::class, 'slug', $this->title);
-                $this->content = $data['content'];
-                $this->excerpt = $data['excerpt'] ? $data['excerpt'] : $this->helper->getExcerpt(strip_tags($data['content']), 0, 300);
-                $this->image_normal = Upload::getFilename();
-                $this->image_thumbnail = Upload::getFilename();
-                $this->status = 1;
-                $this->created_by = Auth::user()->id;
-                $this->updated_by = Auth::user()->id;
-                $this->save();
-
-                DB::commit();
-
-                return $this->id;
-            }
-            catch(\Error $e)
-            {
-                DB::rollback();
-                File::delete(Config::get('upload_path.blog') . '/' . Upload::getFilename());
-            }
+            return $this->id;
         }
 
         public function editData(array $data): bool {}
