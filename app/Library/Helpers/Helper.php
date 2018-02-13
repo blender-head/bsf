@@ -4,18 +4,23 @@
 
 	class Helper
 	{
-		public function getExcerpt($str, $startPos=0, $maxLength=100) 
+		/**
+         *  Create an excerpt from a text
+         *  @param string $str
+         *  @param int $startPos
+         *  @param int $maxLength
+         *  @return string
+         */
+		public function getExcerpt(string $str, int $startPos = 0, int $maxLength = 100): string
 		{
+			$excerpt = $str;
+
 		    if(strlen($str) > $maxLength) 
 		    {
-		        $excerpt   = substr($str, $startPos, $maxLength-3);
+		        $excerpt   = substr($str, $startPos, $maxLength - 3);
 		        $lastSpace = strrpos($excerpt, ' ');
 		        $excerpt   = substr($excerpt, 0, $lastSpace);
 		        $excerpt  .= '...';
-		    } 
-		    else 
-		    {
-		        $excerpt = $str;
 		    }
 		    
 		    return $excerpt;

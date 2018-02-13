@@ -88,9 +88,9 @@
             }
         }
 
-        public function editData(string $id) {}
-        public function setStatus(string $id) {}
-        public function deleteData(string $id) {}
+        public function editData(array $data): bool {}
+        public function setStatus(array $data): bool {}
+        public function deleteData(array $data): bool {}
 
         /**
          *  Get blog by slug
@@ -99,7 +99,7 @@
          */
         public function getBySlug(string $slug): array
         {
-            $query = "SELECT `b`.`title`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
+            $query = "SELECT `b`.`title`, `b`.`content`, `b`.`excerpt`, `b`.`image_normal`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
                 FROM `blogs` AS `b` INNER JOIN `users` AS `u` ON `b`.`created_by` = `u`.`id` 
             WHERE `b`.`slug` = :slug";
 

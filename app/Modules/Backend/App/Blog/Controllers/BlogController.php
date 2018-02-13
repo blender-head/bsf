@@ -16,8 +16,6 @@
 	{
 		public function getIndex(Blog $model)
 	    {
-	    	//var_dump($model->getAll(['length' => '10', 'start' => '0']));
-	    	//die;
 	    	return View::make('Blog::index');
 	    }
 
@@ -29,6 +27,7 @@
 
 	    public function getCreate()
 	    {
+
 	    	return View::make('Blog::create');
 	    }
 
@@ -38,8 +37,10 @@
 	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
 	    }
 
-	    public function getEdit()
+	    public function getEdit(Request $request, Blog $model)
 	    {
+	    	$slug = $request->input('slug');
+	    	$data = $model->getBySlug($slug);
 	    	return View::make('Blog::edit');
 	    }
 
