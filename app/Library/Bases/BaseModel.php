@@ -16,13 +16,6 @@
 	{
 		use Sluggable;
 
-		protected $helper;
-        
-        public function __construct()
-		{
-			$this->helper = new Helper();
-		}
-
 		/**
          *  Override Eloquent created_at value
          *  @param Carbon $value
@@ -57,6 +50,14 @@
         	return SlugService::createSlug($class, $column, $title);
         }
 
+        protected function updateImage(int $id, string $filename, string $model)
+        {
+            $model = $model::find($id);
+            $model->image_normal = $filename;
+            $model->image_thumbnail = $filename;
+            $model->save();
+        }
+        
 		abstract public function getAll(array $data): array;
 		abstract public function saveData(array $data): int;
 		abstract public function editData(array $data): bool;

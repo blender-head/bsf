@@ -43,13 +43,13 @@
 	    {
 	    	$slug = $request->input('slug');
 	    	$data = $model->getBySlug($slug);
-	    	return View::make('Blog::edit');
+	    	return View::make('Blog::edit', ['blog' => $data[0]]);
 	    }
 
-	    public function postEdit(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)
+	    public function postEdit(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, BlogServices $service)
 	    {
 	    	$form_processor->setOperation('edit');
-	    	return $this->startProcess($request, $form_processor, $data_processor, $model);
+	    	return $this->startProcess($request, $form_processor, $data_processor, $service);
 	    }
 
 	    public function postSetStatus(Request $request, BlogRepository $form_processor, BlogProcessor $data_processor, Blog $model)

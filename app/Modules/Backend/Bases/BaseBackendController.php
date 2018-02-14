@@ -10,7 +10,6 @@
 	{
 	    public function __construct()
         {
-        	parent::__construct();
         	Theme::init('backend');
         }
 	}

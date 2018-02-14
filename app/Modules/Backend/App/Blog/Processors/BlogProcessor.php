@@ -21,7 +21,7 @@
 						break;
 
 					case 'edit':
-						$id = $model->editData($data);
+						$result = $model->update($data);
 						break;
 
 					case 'set_status':

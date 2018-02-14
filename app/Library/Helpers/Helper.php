@@ -1,17 +1,17 @@
 <?php
 	
-	namespace App\Library\Helper;
+	if (! function_exists('upload')) 
+    {
+        function upload($image, $path)
+        {
+            Upload::upload($image, $path);
+            return Upload::getFilename();
+        }
+    }
 
-	class Helper
-	{
-		/**
-         *  Create an excerpt from a text
-         *  @param string $str
-         *  @param int $startPos
-         *  @param int $maxLength
-         *  @return string
-         */
-		public function getExcerpt(string $str, int $startPos = 0, int $maxLength = 100): string
+    if (! function_exists('create_excerpt')) 
+    {
+        function create_excerpt(string $str, int $startPos = 0, int $maxLength = 100): string
 		{
 			$excerpt = $str;
 
@@ -25,4 +25,4 @@
 		    
 		    return $excerpt;
 		}
-	}
+    }

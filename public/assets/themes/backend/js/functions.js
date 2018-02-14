@@ -393,12 +393,10 @@ function preview_image(event, file, img_element)
                     
                     width = this.width;
 
-                    if (width > 300) {
+                    if (width >= 300) {
                         width_attr = '40%';
                         $(img_element).attr('width', width_attr);
                     }
-                    
-                    console.log(width_attr);
 
                     $(img_element).attr('src', event.target.result);
 

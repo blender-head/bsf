@@ -16,11 +16,6 @@
     {
         public $table = 'blogs';
 
-        public function __construct()
-        {
-            parent::__construct();
-        }
-
         /**
          *  Implmentation of Cviebrock\EloquentSluggable\Sluggable sluggable abstract method
          */
@@ -59,7 +54,7 @@
             $this->title = $data['title'];
             $this->slug = $this->createSlug(Blog::class, 'slug', $this->title);
             $this->content = $data['content'];
-            $this->excerpt = $data['excerpt'] ? $data['excerpt'] : $this->helper->getExcerpt(strip_tags($data['content']), 0, 300);
+            $this->excerpt = $data['excerpt'] ? $data['excerpt'] : create_excerpt(strip_tags($data['content']), 0, 300);
             $this->image_normal = '';
             $this->image_thumbnail = '';
             $this->status = 1;
@@ -70,7 +65,19 @@
             return $this->id;
         }
 
-        public function editData(array $data): bool {}
+        public function editData(array $data): bool 
+        {
+            $model = Blog::find($data['id']);
+            $model->slug = $model->title == $data['title'] ? $model->slug : $this->createSlug(Blog::class, 'slug', $data['title']);
+            $model->title = $data['title'];
+            $model->content = $data['content'];
+            $model->excerpt = $data['excerpt'] ? $data['excerpt'] : create_excerpt(strip_tags($data['content']), 0, 300);
+            $model->updated_by = Auth::user()->id;
+            $model->save();
+
+            return true;
+        }
+
         public function setStatus(array $data): bool {}
         public function deleteData(array $data): bool {}
 
@@ -81,7 +88,7 @@
          */
         public function getBySlug(string $slug): array
         {
-            $query = "SELECT `b`.`title`, `b`.`content`, `b`.`excerpt`, `b`.`image_normal`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
+            $query = "SELECT `b`.`id`, `b`.`title`, `b`.`content`, `b`.`excerpt`, `b`.`image_normal`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
                 FROM `blogs` AS `b` INNER JOIN `users` AS `u` ON `b`.`created_by` = `u`.`id` 
             WHERE `b`.`slug` = :slug";
 

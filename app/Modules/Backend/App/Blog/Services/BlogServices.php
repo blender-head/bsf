@@ -3,38 +3,44 @@
 	namespace App\Modules\Backend\App\Blog\Services;
 
 	use Config;
+    use File;
 
 	use App\Models\Blog;
 
-	use Upload;
-	
 	class BlogServices
 	{
 		public function save(array $data): int
         {
             $model = new Blog();
             $id = $model->saveData($data);
+            $filename = 'default.jpg';
 
-            if($id)
+            if($id && $data['featured_image'])
             {
-            	$filename = $this->upload($data['featured_image']);
-            	$this->updateImage($id, $filename);
+            	$filename = upload($data['featured_image'], Config::get('upload_path.blog'));
             }
 
+            $this->updateImage($id, $filename, Blog::class);
             return $id;
         }
 
-        public function upload(\Illuminate\Http\UploadedFile $featured_image): string
+        public function update(array $data): bool
         {
-        	Upload::upload($featured_image, Config::get('upload_path.blog'));
-        	return Upload::getFilename();
-        }
+            $model = new Blog();
+            $result = $model->editData($data);
+            $filename = $data['old_featured_image'];
 
-        public function updateImage(int $id, string $filename)
-        {
-        	$model = Blog::find($id);
-        	$model->image_normal = $filename;
-			$model->image_thumbnail = $filename;
-			$model->save();
+            if($result && $data['featured_image'])
+            {
+                $filename = upload($data['featured_image'], Config::get('upload_path.blog'));
+
+                if($data['old_featured_image'] != 'default.jpg')
+                {
+                    File::delete(Config::get('upload_path.blog') . DIRECTORY_SEPARATOR . $data['old_featured_image']);
+                }
+            }
+            
+            $this->updateImage($data['id'], $filename, Blog::class);
+            return $result;
         }
 	}

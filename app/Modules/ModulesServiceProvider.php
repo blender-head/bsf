@@ -45,7 +45,7 @@
 
         private function set_shared_views()
         {
-            view()->composer(['layouts.admin'], function ($view) {
+            view()->composer('*', function ($view) {
                 $view->be_prefix = BaseModuleRoute::BE_PREFIX;
             });
         }
