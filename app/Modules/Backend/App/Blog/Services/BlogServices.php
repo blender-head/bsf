@@ -3,9 +3,10 @@
 	namespace App\Modules\Backend\App\Blog\Services;
 
 	use Config;
-    use File;
 
-	use App\Models\Blog;
+    use UploadManager;
+	
+    use App\Models\Blog;
 
 	class BlogServices
 	{
@@ -13,14 +14,13 @@
         {
             $model = new Blog();
             $id = $model->saveData($data);
-            $filename = 'default.jpg';
 
             if($id && $data['featured_image'])
             {
-            	$filename = upload($data['featured_image'], Config::get('upload_path.blog'));
+                $upload_result = $model->uploadImage($data['featured_image'], 'blog');
+                $model->updateImage($id, $upload_result['filename'], $upload_result['filepath'], Blog::class);
             }
-
-            $this->updateImage($id, $filename, Blog::class);
+            
             return $id;
         }
 
@@ -28,19 +28,19 @@
         {
             $model = new Blog();
             $result = $model->editData($data);
-            $filename = $data['old_featured_image'];
 
             if($result && $data['featured_image'])
             {
-                $filename = upload($data['featured_image'], Config::get('upload_path.blog'));
+                $upload_result = $model->uploadImage($data['featured_image'], 'blog');
 
-                if($data['old_featured_image'] != 'default.jpg')
-                {
-                    File::delete(Config::get('upload_path.blog') . DIRECTORY_SEPARATOR . $data['old_featured_image']);
+                if($data['old_featured_image'] != Config::get('default_images.blog_' . env('UPLOAD_DRIVER')))
+                {   
+                    UploadManager::deleteFile($data['old_featured_image'], 'blog');
                 }
+
+                $model->updateImage($data['id'], $upload_result['filename'], $upload_result['filepath'], Blog::class);
             }
             
-            $this->updateImage($data['id'], $filename, Blog::class);
             return $result;
         }
 	}

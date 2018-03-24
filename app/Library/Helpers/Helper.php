@@ -4,8 +4,8 @@
     {
         function upload($image, $path)
         {
-            Upload::upload($image, $path);
-            return Upload::getFilename();
+            UploadManager::upload($image, $path);
+            return UploadManager::getFilename();
         }
     }
 

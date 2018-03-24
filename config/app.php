@@ -170,6 +170,7 @@ return [
         YAAP\Theme\ThemeServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        JD\Cloudder\CloudderServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -266,9 +267,11 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Theme' => YAAP\Theme\Facades\Theme::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
         'Format' => App\Library\FormatManager\Facades\Format::class,
         'Upload' => App\Library\UploadManager\Facades\Upload::class,
         'ImageManager' => App\Library\ImageManager\Facades\ImageManager::class,
+        'UploadManager' => App\Library\UploadManager\Facades\UploadManager::class,
     ],
 
 ];

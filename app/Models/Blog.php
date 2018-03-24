@@ -11,6 +11,7 @@
     use DB;
     use View;
     use Auth;
+    use Config;
     
     class Blog extends BaseModel
     {
@@ -51,12 +52,15 @@
          */
         public function saveData(array $data): int
         {
+            $upload_driver = env('UPLOAD_DRIVER');
+            $path = Config::get('upload_path.blog_' . $upload_driver);
+
             $this->title = $data['title'];
             $this->slug = $this->createSlug(Blog::class, 'slug', $this->title);
             $this->content = $data['content'];
             $this->excerpt = $data['excerpt'] ? $data['excerpt'] : create_excerpt(strip_tags($data['content']), 0, 300);
-            $this->image_normal = '';
-            $this->image_thumbnail = '';
+            $this->filename = Config::get('default_images.blog_' . env('UPLOAD_DRIVER'));
+            $this->filepath = Config::get('default_images.blog_' . env('UPLOAD_DRIVER'));
             $this->status = 1;
             $this->created_by = Auth::user()->id;
             $this->updated_by = Auth::user()->id;
@@ -88,7 +92,7 @@
          */
         public function getBySlug(string $slug): array
         {
-            $query = "SELECT `b`.`id`, `b`.`title`, `b`.`content`, `b`.`excerpt`, `b`.`image_normal`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
+            $query = "SELECT `b`.`id`, `b`.`title`, `b`.`content`, `b`.`excerpt`, `b`.`filename`, `b`.`filepath`, `b`.`created_at`, `b`.`updated_at`, `u`.`name` 
                 FROM `blogs` AS `b` INNER JOIN `users` AS `u` ON `b`.`created_by` = `u`.`id` 
             WHERE `b`.`slug` = :slug";
 

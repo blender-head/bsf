@@ -1,7 +1,6 @@
 <?php
-
-return [
 	
-	'blog' => public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'blogs',
-	
-];
+	return [
+		'blog_native' => public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'blog',
+		'blog_cloudinary' => ['folder' => 'blogs']
+	];

@@ -10,11 +10,18 @@
 
 	use Carbon\Carbon;
 
+    use Config;
+
+    use UploadManager;
+
 	use App\Library\Helper\Helper;
 
 	abstract class BaseModel extends Model
 	{
 		use Sluggable;
+
+        public $file_name;
+        public $file_path;
 
 		/**
          *  Override Eloquent created_at value
@@ -50,14 +57,27 @@
         	return SlugService::createSlug($class, $column, $title);
         }
 
-        protected function updateImage(int $id, string $filename, string $model)
+        public function updateImage(int $id, string $filename, string $filepath, string $model)
         {
             $model = $model::find($id);
-            $model->image_normal = $filename;
-            $model->image_thumbnail = $filename;
+            $model->filename = $filename;
+            $model->filepath = $filepath;
             $model->save();
         }
         
+        public function uploadImage($image, $content_type)
+        {
+            $path = Config::get('upload_path.' . $content_type . '_' . env('UPLOAD_DRIVER'));
+
+            UploadManager::setParentContent($content_type);
+            UploadManager::upload($image, $path);
+
+            return [
+                'filename' => UploadManager::getFileName(),
+                'filepath' => UploadManager::getFilePath()
+            ];
+        }
+
 		abstract public function getAll(array $data): array;
 		abstract public function saveData(array $data): int;
 		abstract public function editData(array $data): bool;

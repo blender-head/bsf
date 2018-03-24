@@ -63,11 +63,11 @@
                         </div>
 
                         <div class="form-group">
-                        	<img width="40%" id="featured-image-preview" src="{{ url('/') }}/uploads/blogs/{{ $blog->image_normal }}" />
+                        	<img width="40%" id="featured-image-preview" src="{{ $blog->filepath }}" />
                         </div>
 
                         <input type="hidden" name="id" value="{{ $blog->id }}">
-                        <input type="hidden" name="old_featured_image" value="{{ $blog->image_normal }}">
+                        <input type="hidden" name="old_featured_image" value="{{ $blog->filename }}">
                         <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
                         <a href="{{ url('/') }}/{{ $be_prefix }}/blogs/index" class="btn btn-success waves-effect waves-light">Cancel</a>
                     </form>

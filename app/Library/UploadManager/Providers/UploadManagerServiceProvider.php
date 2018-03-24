@@ -4,7 +4,7 @@
 
     use Illuminate\Support\ServiceProvider;
 
-    use App\Library\UploadManager\Upload;
+    use App\Library\UploadManager\UploadManager;
 
     class UploadManagerServiceProvider extends ServiceProvider
     {
@@ -15,8 +15,10 @@
          */
         public function register()
         {
-            $this->app->singleton('upload', function ($app) {
-                return new Upload();
+            $this->app->singleton('upload_manager', function ($app) {
+                $image_manager = new UploadManager();
+                $driver = $image_manager->getDriver();
+                return $driver;
             });
         }
     }
