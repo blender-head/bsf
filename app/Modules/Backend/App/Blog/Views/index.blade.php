@@ -70,6 +70,7 @@
         var form_element = '#create-blog';
         var data_selector = 'blog';
         var op_url = baseUrl + '/blogs/delete';
+        var publish_url = baseUrl + '/blogs/set_status';
         var redirect_url = baseUrl + '/blogs/index';
         var op_source = 'Blog';
         var delete_url = baseUrl + '/blogs/delete';

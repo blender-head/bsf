@@ -12,6 +12,7 @@
         private $excerpt;
         private $featured_image;
         private $old_featured_image;
+        private $status;
 
 		public function setOperation($operation_type)
         {
@@ -26,6 +27,7 @@
             $this->excerpt = $request->input('excerpt');
             $this->featured_image = $request->file('featured_image');
             $this->old_featured_image = $request->input('old_featured_image');
+            $this->status = $request->input('status');
             $this->page = $request->input('page');
             $this->limit = $request->input('limit');
             $this->draw = $request->input('draw');
@@ -43,6 +45,7 @@
                 'excerpt' => $this->excerpt,
                 'featured_image' => $this->featured_image,
                 'old_featured_image' => $this->old_featured_image,
+                'status' => $this->status,
                 'op_type' => $this->operation_type,
                 'page' => $this->page,
                 'limit' => $this->limit,

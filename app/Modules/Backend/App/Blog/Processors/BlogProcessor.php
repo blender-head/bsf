@@ -25,11 +25,11 @@
 						break;
 
 					case 'set_status':
-						$model->setStatus($id);
+						$model->setStatus($data);
 						break;
 
 					case 'delete':
-						$model->deleteData($id);
+						$model->deleteData($data);
 						break;
 				}
 

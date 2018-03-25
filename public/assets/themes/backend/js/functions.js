@@ -312,37 +312,90 @@ function deleteImage(id, token, url, masonry_object)
 
 function setStatus(id, status, token, url, redirect_url)
 {
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        data: { 
-            'id' : id,
-            'status': status,
-            '_token': token
-        },
-        url: url,
-        beforeSend: function() {
-            $('.card-box').waitMe({
-                effect : 'stretch',
-                text : 'Updating...',
-                bg : 'rgba(255,255,255,0.7)',
-                color : '#000',
-                sizeW : '',
-                sizeH : ''
+    var status_text = 'unpublish';
+
+    if(status == '1')
+    {
+        status_text = 'publish';
+    }
+
+    swal({   
+        title: "Are you sure?",   
+        text: "You will " + status_text + " this data!",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Yes",   
+        cancelButtonText: "Cancel",   
+        closeOnConfirm: true,   
+        closeOnCancel: true 
+    }, 
+    function(isConfirm) {   
+        if(isConfirm) 
+        {     
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                data: { 
+                    'id' : id,
+                    'status': status,
+                    '_token': token
+                },
+                url: url,
+                beforeSend: function() {
+                    $('.card-box').waitMe({
+                        effect : 'stretch',
+                        text : 'Updating...',
+                        bg : 'rgba(255,255,255,0.7)',
+                        color : '#000',
+                        sizeW : '',
+                        sizeH : ''
+                    });
+                },
+                success: function(data) {
+                    if(data.error_code)
+                    {
+                        showError(data);
+                    }
+                    else
+                    {
+                        swal({
+                            title: 'Status is sucessfully updated',   
+                            html: true,
+                            type: "success",
+                        },
+                        function() {   
+                            for(var i=0;i<id.length;i++)
+                            {
+                                if(status == '0')
+                                {
+                                    $('.status-text-' + id[i]).removeClass('label-success');
+                                    $('.status-text-' + id[i]).addClass('label-info');
+                                    $('.status-text-' + id[i]).html('Unpublished');
+                                    $('.status-button-' + id[i]).data('status', '1');
+                                    $('.status-button-' + id[i]).prop('title', 'Publish').tooltip('fixTitle').tooltip('show');
+                                    //$(element).prop('title', 'NEW_TITLE').tooltip('fixTitle').tooltip('show');
+                                    $('.status-button-icon-' + id[i]).removeClass('md-close');
+                                    $('.status-button-icon-' + id[i]).addClass('md-done');
+                                }
+                                else
+                                {
+                                    $('.status-text-' + id[i]).removeClass('label-info');
+                                    $('.status-text-' + id[i]).addClass('label-success');
+                                    $('.status-text-' + id[i]).html('Published');
+                                    $('.status-button-' + id[i]).data('status', '0');
+                                    $('.status-button-' + id[i]).prop('title', 'Unpublish').tooltip('fixTitle').tooltip('show');
+                                    $('.status-button-icon-' + id[i]).removeClass('md-done');
+                                    $('.status-button-icon-' + id[i]).addClass('md-close');
+                                }   
+                            }
+                        });
+                    }
+                },
+                complete: function() {
+                    $('.card-box').waitMe('hide');
+                } 
             });
-        },
-        success: function(data) {
-            if(data.error)
-            {
-                showError(data);
-            }
-            else
-            {
-                showSuccess('Status is successfully updated', redirect_url);
-            }
-        },
-        complete: function() {
-            $('.card-box').waitMe('hide');
         } 
     });
 }

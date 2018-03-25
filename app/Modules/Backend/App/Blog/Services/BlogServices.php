@@ -43,4 +43,11 @@
             
             return $result;
         }
+
+        public function setStatus(array $data): bool
+        {
+            $model = new Blog();
+            $model->setStatus($data);
+            return true;
+        }
 	}

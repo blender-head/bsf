@@ -82,7 +82,24 @@
             return true;
         }
 
-        public function setStatus(array $data): bool {}
+        public function setStatus(array $data): bool 
+        {
+            $prepared_data = [];
+            
+            $in_placeholders = $this->formatInPlaceholders($data['id']);
+            
+            $prepared_data[0] = $data['status'];
+
+            foreach($data['id'] as $id)
+            {
+                array_push($prepared_data, $id);
+            }
+
+            DB::update("UPDATE blogs SET status = ? WHERE id IN (" . $in_placeholders . ")", $prepared_data);
+
+            return true;
+        }
+
         public function deleteData(array $data): bool {}
 
         /**
@@ -119,7 +136,7 @@
                     $row_number,
                     $result->title,
                     $result->author,
-                    View::make('partials.status', ['status' => $result->status])->render(),
+                    View::make('partials.status', ['id' => $result->id, 'status' => $result->status])->render(),
                     date('d-m-Y H:i:s', strtotime($result->created_at)),
                     View::make('partials.default_action', ['data' => $result, 'edit_url' => $edit_url])->render()
                 ];

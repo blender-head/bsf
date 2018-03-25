@@ -20,9 +20,6 @@
 	{
 		use Sluggable;
 
-        public $file_name;
-        public $file_path;
-
 		/**
          *  Override Eloquent created_at value
          *  @param Carbon $value
@@ -76,6 +73,28 @@
                 'filename' => UploadManager::getFileName(),
                 'filepath' => UploadManager::getFilePath()
             ];
+        }
+
+        public function formatInPlaceholders(array $data)
+        {
+            $placeholder = '';
+
+            foreach($data as $key => $value)
+            {
+                $placeholder .= '?';
+
+                if($key < count($data) - 1)
+                {
+                    $placeholder .= ',';
+                }
+            }
+
+            return $placeholder;
+        }
+
+        public function formatInData(array $data)
+        {
+
         }
 
 		abstract public function getAll(array $data): array;

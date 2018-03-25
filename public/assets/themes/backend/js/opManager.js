@@ -117,7 +117,7 @@ $(document).ready(function() {
         e.preventDefault();
         var id = [$(this).data('id')];
         var status = $(this).data('status');
-        setStatus(id, status, token, publish_url, redirect_url);
+        setStatus(id, status, token, publish_url);
     });
 
     $('body').on('click', '.set-status-all', function(e) {
