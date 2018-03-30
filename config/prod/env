@@ -34,3 +34,11 @@ PUSHER_APP_KEY=
 PUSHER_APP_SECRET=
 
 IMAGE_DRIVER=intervention
+UPLOAD_DRIVER=cloudinary
+
+CLOUDINARY_API_KEY=464451915554474
+CLOUDINARY_API_SECRET=sjW1p5FTy-5_OTGsxgRPel2mgMY
+CLOUDINARY_CLOUD_NAME=blowfish
+CLOUDINARY_BASE_URL=http://res.cloudinary.com/blowfish
+CLOUDINARY_SECURE_URL=https://res.cloudinary.com/blowfish
+CLOUDINARY_API_BASE_URL=https://api.cloudinary.com/v1_1/blowfish
