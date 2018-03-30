@@ -12,20 +12,27 @@
 			{
 				switch($data['op_type'])
 				{
+					case 'index':
+						$this->output = $this->getIndexData($model, $data);
+						break;
+
 					case 'create':
-						$id = $model::save($data);
+						$id = $model->save($data);
 						break;
 
 					case 'edit':
-						$id = $model::edit($data);
+						$result = $model->update($data);
+						break;
+
+					case 'set_status':
+						$model->setStatus($data);
 						break;
 
 					case 'delete':
-						$model::delete($id);
+						$model->deleteData($data);
 						break;
 				}
 
-				$this->output = $id;
 				return true;
 			}
 			catch(\Error $e)

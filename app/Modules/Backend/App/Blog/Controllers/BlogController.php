@@ -2,15 +2,14 @@
 
 	namespace App\Modules\Backend\App\Blog\Controllers;
 
+	use Illuminate\Http\Request;
+
 	use App\Modules\Backend\Bases\BaseBackendController;
 
 	use App\Modules\Backend\App\Blog\Requests\BlogRepository;
 	use App\Modules\Backend\App\Blog\Processors\BlogProcessor;
 	use App\Models\Blog;
-
 	use App\Modules\Backend\App\Blog\Services\BlogServices;
-
-	use Illuminate\Http\Request;
 
 	use View;
 	

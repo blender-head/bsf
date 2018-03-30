@@ -16,7 +16,7 @@
 
         public function bind()
         {
-            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns], function () {
+            Route::group(['prefix' => $this->route_prefix, 'namespace' => $this->controller_ns, 'middleware' => ['web','role:super_admin']], function () {
                 
                 Route::get('/', [
                     'as' => 'news.index', 
@@ -26,6 +26,10 @@
                 Route::get('index', [
                     'as' => 'news.index', 
                     'uses' => 'NewsController@getIndex'
+                ]);
+
+                Route::post('index', [
+                    'uses' => 'NewsController@postIndex'
                 ]);
 
                 Route::get('create', [
@@ -39,13 +43,17 @@
 
                 Route::get('edit', [
                     'as' => 'news.edit', 
-                    'uses' => 'NewsController@postEdit'
+                    'uses' => 'NewsController@getEdit'
                 ]);
 
                 Route::post('edit', [
                     'uses' => 'NewsController@postEdit'
                 ]);
 
+                Route::post('set_status', [
+                    'uses' => 'NewsController@postSetStatus'
+                ]);
+                
                 Route::post('delete', [
                     'uses' => 'NewsController@postDelete'
                 ]);

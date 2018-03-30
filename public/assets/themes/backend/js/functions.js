@@ -224,6 +224,8 @@ function deleteData(id, token, url, datatable_el)
                                 $('.data-' + id[i]).remove();   
                             }
 
+                            $("#selectall").prop("checked",false);
+                            
                             var table = $(datatable_el).DataTable();
                             table.draw(false);
 
@@ -394,4 +396,33 @@ function preview_image(event, file, img_element)
     };
   
     fileReader.readAsArrayBuffer(file);
+}
+
+function initSummernote(el)
+{
+    $(el).summernote({
+        height: 350,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: false                 // set focus to editable area after initializing summernote
+    });
+}
+
+function previewFeaturedImage(event, el)
+{
+    $('#featured-image-preview').removeAttr('src');
+    $('#featured-image-preview').removeAttr('width');
+
+    if (el.files && el.files[0])
+    {
+        file = el.files[0]; 
+
+        preview_image(event, file, '#featured-image-preview');
+    }
+}
+
+function getSummerNoteContent(el)
+{
+    var content = $(el).summernote('isEmpty') ? '' : $(el).code();
+    return content;
 }

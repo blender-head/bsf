@@ -87,31 +87,28 @@
     <script src="{{ Theme::asset('plugins/tokenfield/bootstrap-tokenfield.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
-
-        var src = [];
-
-        $(document).ready(function(){
-            
-            $('.blog_content').summernote({
-                height: 350,                 // set editor height
-                minHeight: null,             // set minimum height of editor
-                maxHeight: null,             // set maximum height of editor
-                focus: false                 // set focus to editable area after initializing summernote
-            });
-
-        });
-    </script>
-
-    <script type="text/javascript">
         var form_element = '#create-blog';
         var data_selector = 'blog';
         var op_url = baseUrl + '/blogs/create';
         var redirect_url = baseUrl + '/blogs/index';
         var op_source = 'Blog';
         var origin = 'post';
+        var summernote_el = '.blog_content';
     </script>
+    
+    <script type="text/javascript">
+
+        var src = [];
+
+        $(document).ready(function(){
+            
+            initSummernote(summernote_el);
+
+        });
+    </script>
+
 @stop
 
 @section('additional_scripts')
-    <script src="{{ Theme::asset('pages/modules/BlogManager.js') }}"></script>
+    <script src="{{ Theme::asset('pages/modules/ContentManager.js') }}"></script>
 @stop
