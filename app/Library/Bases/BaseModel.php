@@ -8,6 +8,8 @@
 
 	use Cviebrock\EloquentSluggable\Sluggable;
 
+    use Webpatser\Uuid\Uuid;
+
 	use Carbon\Carbon;
 
     use Config;
@@ -91,10 +93,10 @@
 
             return $placeholder;
         }
-
-        public function formatInData(array $data)
+        
+        public function generateUUID()
         {
-
+            return Uuid::generate(4)->string;
         }
 
 		abstract public function getAll(array $data): array;

@@ -50,4 +50,21 @@
             $model->setStatus($data);
             return true;
         }
+
+        public function deleteData(array $data): bool
+        {
+            $model = new Blog();
+
+            $blog_images = $model->getImagesByUUID($data);
+
+            $result = $model->deleteData($data);
+
+            foreach($blog_images as $image)
+            {
+                if($image != Config::get('default_images.blog_' . env('UPLOAD_DRIVER')))
+                {   
+                    UploadManager::deleteFile($image->filename, 'blog');
+                }
+            }
+        }
 	}

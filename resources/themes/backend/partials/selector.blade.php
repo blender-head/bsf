@@ -1,1 +1,1 @@
-<td><input type="checkbox" class="{{ $content_type }}" value="{{ $id }}"></td>
+<td><input type="checkbox" class="{{ $content_type }}" value="{{ $uuid }}"></td>

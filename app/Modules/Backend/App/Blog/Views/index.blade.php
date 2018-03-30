@@ -76,6 +76,7 @@
         var delete_url = baseUrl + '/blogs/delete';
         var publish_url = baseUrl + '/blogs/set_status';
         var token = "{{ csrf_token() }}";
+        var datatable_el = "#blog-data";
     </script>
 @stop
 
@@ -85,11 +86,8 @@
     <script type="text/javascript">
 
     	$(document).ready(function() {
-      		var datatable_el = "#blog-data";
       		var datatable_url = baseUrl + '/blogs/index';
       		var datatable_loader_el = ".table-wrapper";
-
-      		console.log(datatable_url);
 
       		ajax_data_table(datatable_el, datatable_loader_el, datatable_url);
 
@@ -111,7 +109,7 @@
 		          op_type = 'search';
 		        }
 
-        		var table = $('#bank-data').DataTable();
+        		var table = $('#blog-data').DataTable();
 
         		table.ajax.url(baseUrl + 'pm/master_data/bank/post_search');
 

@@ -27,6 +27,9 @@ function ajax_data_table(el, el_loader, url)
             complete: function(){
                 $(el_loader).waitMe('hide');
             }
+        },
+        createdRow: function ( row, data, index ) {
+            $(row).addClass('data-' + data[7]);
         }
     });
 }
@@ -160,34 +163,13 @@ function readURL(input,el)
     }
 }
 
-function updateCoords(c,type)
-{
-    switch(type)
-    {
-        case 'avatar':
-            $('#x').val(c.x);
-            $('#y').val(c.y);
-            $('#w').val(c.w);
-            $('#h').val(c.h);
-            break;
-
-        case 'logo':
-            $('#x_logo').val(c.x);
-            $('#y_logo').val(c.y);
-            $('#w_logo').val(c.w);
-            $('#h_logo').val(c.h);
-            break;
-    }
-    
-};
-
 function resetFormElement(e) 
 {
       e.wrap('<form>').closest('form').get(0).reset();
       e.unwrap();
 }
 
-function deleteData(id, token, url, redirect_url)
+function deleteData(id, token, url, datatable_el)
 {
     swal({   
         title: "Are you sure?",   
@@ -228,7 +210,24 @@ function deleteData(id, token, url, redirect_url)
                     }
                     else
                     {
-                        showSuccess('Data is successfully deleted', redirect_url);
+                        swal({
+                            title: 'Data is sucessfully deleted',   
+                            html: true,
+                            type: "success",
+                        },
+                        function() {   
+
+                            //showSuccess('Data is successfully deleted', redirect_url);
+
+                            for(var i=0;i<id.length;i++)
+                            {
+                                $('.data-' + id[i]).remove();   
+                            }
+
+                            var table = $(datatable_el).DataTable();
+                            table.draw(false);
+
+                        });
                     }
                 },
                 complete: function() {
@@ -242,72 +241,6 @@ function deleteData(id, token, url, redirect_url)
 function cancelOp(redirect_url)
 {
     window.location.replace(redirect_url);
-}
-
-function deleteImage(id, token, url, masonry_object)
-{
-    swal({   
-        title: "Are you sure?",   
-        text: "You will not be able to recover this file!",   
-        type: "warning",   
-        showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
-        confirmButtonText: "Yes",   
-        cancelButtonText: "Cancel",   
-        closeOnConfirm: true,   
-        closeOnCancel: true 
-    }, 
-    function(isConfirm) {   
-        if(isConfirm) 
-        {     
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                data: { 
-                    'id' : id,
-                    '_token': token
-                },
-                url: url,
-                beforeSend: function() {
-                    $('.gal-detail-' + id).waitMe({
-                        effect : 'stretch',
-                        text : 'Deleting...',
-                        bg : 'rgba(255,255,255,0.7)',
-                        color : '#000',
-                        sizeW : '',
-                        sizeH : ''
-                    });
-                },
-                complete: function(){
-                    $('.gal-detail-' + id).waitMe('hide');
-                },
-                success: function(data) {
-                    if(data.error)
-                    {
-                        showError(data);
-                    }
-                    else
-                    {
-                        var removed = $('.media-item.item-' + id);
-
-                        $('.remove-featured').addClass('hide');
-                        $('.add-featured').removeClass('hide');
-
-                        masonry_object.imagesLoaded(function(){ 
-                            masonry_object.masonry('remove', removed).masonry('layout');
-                            masonry_object.masonry('remove', removed).masonry('reloadItems');
-                        });
-
-                        swal({
-                            title: 'Image is successfully deleted',   
-                            html: true,
-                            type: "success",
-                        });
-                    }
-                }
-            });
-        } 
-    });
 }
 
 function setStatus(id, status, token, url, redirect_url)
@@ -374,7 +307,6 @@ function setStatus(id, status, token, url, redirect_url)
                                     $('.status-text-' + id[i]).html('Unpublished');
                                     $('.status-button-' + id[i]).data('status', '1');
                                     $('.status-button-' + id[i]).prop('title', 'Publish').tooltip('fixTitle').tooltip('show');
-                                    //$(element).prop('title', 'NEW_TITLE').tooltip('fixTitle').tooltip('show');
                                     $('.status-button-icon-' + id[i]).removeClass('md-close');
                                     $('.status-button-icon-' + id[i]).addClass('md-done');
                                 }

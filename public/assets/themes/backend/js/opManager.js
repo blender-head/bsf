@@ -72,8 +72,6 @@ $(document).ready(function() {
  
     $('body').on('click', '.' + data_selector, function(e) {
         
-        var test = "." + data_selector + ":checked";
-
         if($("." + data_selector).length == $("." + data_selector + ":checked").length) 
         {
             $("#selectall").prop("checked", "checked");
@@ -100,7 +98,7 @@ $(document).ready(function() {
     $('body').on('click', '.delete', function(e) {
         e.preventDefault();
         var id = [$(this).data('id')];
-        deleteData(id, token, op_url, redirect_url);
+        deleteData(id, token, op_url, datatable_el);
     });
 
     $('body').on('click', '.delete-all', function(e) {
