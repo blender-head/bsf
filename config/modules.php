@@ -30,7 +30,7 @@
 			'type' => 'backend'
 		],
 		[
-			'name' => 'Review',
+			'name' => 'Reviews',
 			'type' => 'backend'
 		],
 		[

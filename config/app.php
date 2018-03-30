@@ -205,7 +205,7 @@ return [
         App\Modules\Backend\App\Event\Providers\EventRouteServiceProvider::class,
         App\Modules\Backend\App\Feature\Providers\FeatureRouteServiceProvider::class,
         App\Modules\Backend\App\News\Providers\NewsRouteServiceProvider::class,
-        App\Modules\Backend\App\Review\Providers\ReviewRouteServiceProvider::class,
+        App\Modules\Backend\App\Reviews\Providers\ReviewsRouteServiceProvider::class,
 
         // Frontend
         App\Modules\Frontend\App\Home\Providers\HomeRouteServiceProvider::class,
