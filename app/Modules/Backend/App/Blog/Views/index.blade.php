@@ -28,8 +28,8 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Bulk Actions <span class="caret"></span></button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a class="set-status-all" data-status="published" href="#">Publish</a></li>
-                                        <li><a class="set-status-all" data-status="unpublished" href="#">Unpublish</a></li>
+                                        <li><a class="set-status-all" data-status="1" href="#">Publish</a></li>
+                                        <li><a class="set-status-all" data-status="0" href="#">Unpublish</a></li>
                                         <li><a class="delete-all" href="#">Delete</a></li>
                                     </ul>
                                 </div>

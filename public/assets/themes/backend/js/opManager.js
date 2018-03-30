@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    $("#selectall").removeProp("checked");
-    $("." + data_selector).removeProp("checked");
+    $("#selectall").prop("checked",false);
+    $("." + data_selector).prop("checked",false);
 
     var id = [];
 
@@ -78,7 +78,6 @@ $(document).ready(function() {
         } 
         else 
         {
-            console.log(test);
             $("#selectall").removeProp("checked");
         }
 
@@ -106,7 +105,7 @@ $(document).ready(function() {
 
         if(id.length > 0)
         {
-            deleteData(id, token, op_url, redirect_url);    
+            deleteData(id, token, op_url, datatable_el);    
         }
         
     }); 
@@ -124,7 +123,7 @@ $(document).ready(function() {
 
         if(id.length > 0)
         {
-            setStatus(id, status, token, publish_url, redirect_url);    
+            setStatus(id, status, token, publish_url);    
         }
         
     }); 
